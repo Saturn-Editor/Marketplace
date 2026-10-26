@@ -1,0 +1,8 @@
+{
+  "name": "Saturn-Marketplace",
+  "description": "Index of community languages and themes for Saturn",
+  "scripts": {
+    "validate": "node scripts/validate.mjs --all"
+  },
+  "private": true
+}
