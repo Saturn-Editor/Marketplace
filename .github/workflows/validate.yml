@@ -1,0 +1,44 @@
+name: Validate index
+
+on:
+  pull_request:
+    paths: ['index.json', 'scripts/**', '.github/workflows/**']
+  push:
+    branches: [main]
+    paths: ['index.json', 'scripts/**', '.github/workflows/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      # The PR's files, which may come from a fork.
+      - uses: actions/checkout@v4
+        with:
+          path: pr
+
+      # The validator always runs from the base branch, so a PR can't loosen its own checks.
+      - uses: actions/checkout@v4
+        if: github.event_name == 'pull_request'
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Falls back to the PR's validator only until one exists on main.
+      - name: Validate changed entries
+        if: github.event_name == 'pull_request'
+        run: |
+          validator=base/scripts/validate.mjs
+          [ -f "$validator" ] || validator=pr/scripts/validate.mjs
+          node "$validator" pr/index.json --base base/index.json
+
+      - name: Validate all entries
+        if: github.event_name != 'pull_request'
+        run: node pr/scripts/validate.mjs pr/index.json --all

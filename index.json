@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "languages": [
+    {
+      "id": "markdown",
+      "name": "Markdown",
+      "description": "Language module for Markdown files (.md)",
+      "author": "Saturn-Editor",
+      "repo": "Saturn-Editor/Language-Markdown",
+      "version": "1.0.0",
+      "saturnApi": "^0.1",
+      "badge": "MD",
+      "download": "https://github.com/Saturn-Editor/Language-Markdown/releases/download/v1.0.0/markdown-1.0.0.zip",
+      "sha256": "570cb4988124836798134fe76d03d07daec283a6c33dc77d9be3f234cfa8e827"
+    }
+  ],
+  "themes": []
+}
