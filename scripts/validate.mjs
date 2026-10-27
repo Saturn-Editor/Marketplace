@@ -44,7 +44,21 @@ const FIELDS = {
     optional: [],
     flags: [],
   },
+  extensions: {
+    required: ['id', 'name', 'description', 'author', 'repo', 'version', 'saturnApi', 'download', 'sha256'],
+    optional: ['badge'],
+    flags: [],
+  },
 };
+
+const KINDS = Object.keys(FIELDS);
+// Kinds Saturn reads as empty when missing; the rest must be present.
+const OPTIONAL_KINDS = ['extensions'];
+const MANIFESTS = { languages: 'saturn-language.json', themes: 'theme.json', extensions: 'saturn-extension.json' };
+
+const SETTING_TYPES = ['text', 'select', 'checkbox', 'folder', 'file'];
+// Contributions only languages may make.
+const LANGUAGE_ONLY = ['languages', 'languageServer', 'previews', 'fileTemplates', 'newProject'];
 
 const VARIANTS = ['light', 'dark'];
 const FONT_STYLES = ['bold', 'italic', 'underline', 'strikethrough'];
@@ -101,7 +115,7 @@ function checkEntry(kind, entry, where) {
   if (!REPO.test(entry.repo)) fail(where, `repo "${entry.repo}" must be "owner/name"`);
   if (!SEMVER.test(entry.version)) fail(where, `version "${entry.version}" must be semver (x.y.z)`);
   if (!SHA256.test(entry.sha256)) fail(where, 'sha256 must be 64 lowercase hex characters');
-  if (kind === 'languages' && !CARET.test(entry.saturnApi)) {
+  if (kind !== 'themes' && !CARET.test(entry.saturnApi)) {
     fail(where, `saturnApi "${entry.saturnApi}" must be a caret range like "^0.1"`);
   }
 
@@ -121,12 +135,13 @@ function checkIndex(index) {
   }
   if (index.schema !== SCHEMA) fail('index.json', `"schema" must be ${SCHEMA}`);
   for (const key of Object.keys(index)) {
-    if (!['schema', 'languages', 'themes'].includes(key)) fail('index.json', `unknown field "${key}"`);
+    if (!['schema', ...KINDS].includes(key)) fail('index.json', `unknown field "${key}"`);
   }
 
   const valid = [];
   const seen = new Map();
-  for (const kind of ['languages', 'themes']) {
+  for (const kind of KINDS) {
+    if (index[kind] === undefined && OPTIONAL_KINDS.includes(kind)) continue;
     if (!Array.isArray(index[kind])) {
       fail('index.json', `"${kind}" must be an array`);
       continue;
@@ -147,16 +162,49 @@ function checkIndex(index) {
   return valid;
 }
 
-function checkLanguageManifest(manifest, entry, where) {
+function checkModuleManifest(kind, manifest, entry, where) {
+  const name = MANIFESTS[kind];
   for (const key of ['id', 'name', 'version', 'saturnApi']) {
-    if (!isString(manifest[key])) fail(where, `saturn-module.json: "${key}" must be a non-empty string`);
+    if (!isString(manifest[key])) fail(where, `${name}: "${key}" must be a non-empty string`);
   }
-  if (manifest.id !== entry.id) fail(where, `saturn-module.json id "${manifest.id}" does not match entry id "${entry.id}"`);
+  if (manifest.id !== entry.id) fail(where, `${name} id "${manifest.id}" does not match entry id "${entry.id}"`);
   if (manifest.version !== entry.version) {
-    fail(where, `saturn-module.json version "${manifest.version}" does not match entry version "${entry.version}"`);
+    fail(where, `${name} version "${manifest.version}" does not match entry version "${entry.version}"`);
   }
   if (isString(manifest.saturnApi) && !CARET.test(manifest.saturnApi)) {
-    fail(where, `saturn-module.json saturnApi "${manifest.saturnApi}" must be a caret range like "^0.1"`);
+    fail(where, `${name} saturnApi "${manifest.saturnApi}" must be a caret range like "^0.1"`);
+  }
+
+  const list = (value, at) => {
+    if (value === undefined) return [];
+    if (Array.isArray(value)) return value;
+    fail(where, `${name}: ${at} must be an array`);
+    return [];
+  };
+  const strings = (item, at, keys) => {
+    for (const key of keys) if (!isString(item?.[key])) fail(where, `${at}.${key} must be a non-empty string`);
+  };
+
+  list(manifest.requires, '"requires"').forEach((item, i) => strings(item, `${name}: requires[${i}]`, ['name', 'command']));
+
+  const contributes = manifest.contributes;
+  if (contributes === undefined) return;
+  if (!contributes || typeof contributes !== 'object' || Array.isArray(contributes)) {
+    fail(where, `${name}: "contributes" must be an object`);
+    return;
+  }
+  list(contributes.settings, 'contributes.settings').forEach((item, i) => {
+    const at = `${name}: contributes.settings[${i}]`;
+    strings(item, at, ['id', 'label']);
+    if (!SETTING_TYPES.includes(item?.type)) fail(where, `${at}.type must be one of ${SETTING_TYPES.join(', ')}`);
+  });
+  list(contributes.buttons, 'contributes.buttons').forEach((item, i) => {
+    strings(item, `${name}: contributes.buttons[${i}]`, ['command', 'title', 'badge']);
+  });
+  if (kind === 'extensions') {
+    for (const key of LANGUAGE_ONLY) {
+      if (key in contributes) fail(where, `${name}: extensions cannot contribute "${key}" (languages only)`);
+    }
   }
 }
 
@@ -239,7 +287,7 @@ async function checkRelease({ kind, entry, where }) {
     return;
   }
 
-  const manifestName = kind === 'languages' ? 'saturn-module.json' : 'theme.json';
+  const manifestName = MANIFESTS[kind];
   const dir = mkdtempSync(join(tmpdir(), 'saturn-market-'));
   try {
     const zipPath = join(dir, 'release.zip');
@@ -258,8 +306,8 @@ async function checkRelease({ kind, entry, where }) {
     }
     const manifest = readJson(manifestPath, `${where}: ${manifestName}`);
     if (!manifest || typeof manifest !== 'object') return;
-    if (kind === 'languages') checkLanguageManifest(manifest, entry, where);
-    else checkThemeManifest(manifest, entry, where);
+    if (kind === 'themes') checkThemeManifest(manifest, entry, where);
+    else checkModuleManifest(kind, manifest, entry, where);
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -269,7 +317,7 @@ function changedEntries(valid, basePath) {
   const base = basePath && existsSync(basePath) ? readJson(basePath, 'base index') : null;
   if (!base) return valid;
   const before = new Map();
-  for (const kind of ['languages', 'themes']) {
+  for (const kind of KINDS) {
     for (const entry of Array.isArray(base[kind]) ? base[kind] : []) {
       if (entry && typeof entry === 'object') before.set(`${kind}:${entry.id}`, JSON.stringify(entry));
     }

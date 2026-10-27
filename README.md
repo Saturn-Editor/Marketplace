@@ -1,18 +1,19 @@
 # Saturn Marketplace
 
-The list of community languages and themes for [Saturn](https://github.com/Saturn-Editor). Saturn has no server: it reads [`index.json`](index.json) straight from this repo at
+The list of community languages, themes and extensions for [Saturn](https://github.com/Saturn-Editor). Saturn has no server: it reads [`index.json`](index.json) straight from this repo at
 
 ```
 https://raw.githubusercontent.com/Saturn-Editor/Marketplace/refs/heads/main/index.json
 ```
 
-## Submitting a language or theme
+## Submitting a language, theme or extension
 
 1. Publish a GitHub Release in your own repo with a `.zip` asset. The zip holds your folder's contents **at its root**:
-   - a language has `saturn-module.json` at the top level;
-   - a theme has `theme.json` at the top level.
+   - a language has `saturn-language.json` at the top level;
+   - a theme has `theme.json` at the top level;
+   - an extension has `saturn-extension.json` at the top level.
 2. Get the zip's SHA-256: `shasum -a 256 my-theme-1.0.0.zip` (macOS) or `sha256sum my-theme-1.0.0.zip` (Linux).
-3. Open a pull request that adds your entry to `languages` or `themes` in `index.json`. To publish an update, change `version`, `download` and `sha256` on your existing entry.
+3. Open a pull request that adds your entry to `languages`, `themes` or `extensions` in `index.json`. To publish an update, change `version`, `download` and `sha256` on your existing entry.
 
 A check downloads your zip, compares its SHA-256, and validates the manifest inside it. A maintainer then reviews and merges.
 
@@ -26,7 +27,7 @@ A check downloads your zip, compares its SHA-256, and validates the manifest ins
   "author": "Saturn-Editor",
   "repo": "Saturn-Editor/Language-Markdown",
   "version": "0.1.0",
-  "saturnApi": "^0.1",
+  "saturnApi": "^0.2",
   "badge": "MD",
   "default": true,
   "download": "https://github.com/Saturn-Editor/Language-Markdown/releases/download/v0.1.0/markdown-0.1.0.zip",
@@ -34,7 +35,13 @@ A check downloads your zip, compares its SHA-256, and validates the manifest ins
 }
 ```
 
-`badge` is optional. `default` is optional (`true` or `false`): languages with `"default": true` are pre-ticked in Saturn's first-launch "Welcome to Saturn" popup, where the user can untick them before they are installed. The zip's `saturn-module.json` must have the same `id` and `version`, and a `saturnApi` caret range.
+`badge` is optional. `default` is optional (`true` or `false`): languages with `"default": true` are pre-ticked in Saturn's first-launch "Welcome to Saturn" popup, where the user can untick them before they are installed. The zip's `saturn-language.json` must have the same `id` and `version`, and a `saturnApi` caret range. The current Saturn API is `^0.2`; Saturn shows entries built for an older API as incompatible.
+
+Language and extension manifests may also declare:
+
+- `requires`: `[{ "name", "command", "args"?, "install"? }]`, the external tools the module needs;
+- `contributes.settings`: `[{ "id", "label", "type", "default"?, "options"?, "description"? }]`, where `type` is `text`, `select`, `checkbox`, `folder` or `file`;
+- `contributes.buttons`: `[{ "command", "title", "badge" }]`.
 
 ### Theme entry
 
@@ -78,11 +85,30 @@ A syntax rule is `{ "scope", "color"?, "fontStyle"? }`:
 - `color` is optional: a Tailwind colour, or a theme token such as `text` or `muted`.
 - `fontStyle` is optional: any of `bold`, `italic`, `underline`, `strikethrough`, space-separated, or `""` to reset.
 
+### Extension entry
+
+```json
+{
+  "id": "claudecode",
+  "name": "Claude Code",
+  "description": "Claude Code integration for Saturn.",
+  "author": "Saturn-Editor",
+  "repo": "Saturn-Editor/Module-Claude",
+  "version": "1.0.0",
+  "saturnApi": "^0.2",
+  "badge": "CC",
+  "download": "https://github.com/Saturn-Editor/Module-Claude/releases/download/v1.0.0/claudecode-1.0.0.zip",
+  "sha256": "<64 hex characters>"
+}
+```
+
+The same fields as a language, except that there is no `default`. `badge` is optional. The zip's `saturn-extension.json` must have the same `id` and `version`, and a `saturnApi` caret range. Besides `requires`, settings and buttons, an extension can contribute `panels`, `commands` and `runConfigurations`, but not `languages`, `languageServer`, `previews`, `fileTemplates` or `newProject`.
+
 ### Rules
 
-- `id` is lowercase `a-z`, `0-9`, `.` and `-`, and unique across all languages and themes.
+- `id` is lowercase `a-z`, `0-9`, `.` and `-`, and unique across all languages, themes and extensions.
 - `version` is semver (`1.2.3`).
-- `languages` and `themes` must each have at least one entry.
+- `languages` and `themes` must each have at least one entry. `extensions` may be left out, but if it is present it must have at least one entry.
 - `download` must be a `.zip` under `https://github.com/<repo>/releases/download/`.
 
 ## Checking locally

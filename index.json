@@ -7,12 +7,12 @@
       "description": "Language module for Markdown files (.md)",
       "author": "Lewis Milburn",
       "repo": "Saturn-Editor/Language-Markdown",
-      "version": "1.0.0",
-      "saturnApi": "^0.1",
+      "version": "1.1.0",
+      "saturnApi": "^0.2",
       "badge": "MD",
       "default": true,
-      "download": "https://github.com/Saturn-Editor/Language-Markdown/releases/download/v1.0.0/markdown-1.0.0.zip",
-      "sha256": "570cb4988124836798134fe76d03d07daec283a6c33dc77d9be3f234cfa8e827"
+      "download": "https://github.com/Saturn-Editor/Language-Markdown/releases/download/v1.1.0/markdown-1.1.0.zip",
+      "sha256": "fa174f836a82c059f02167cef76c0a08a9fb6a6bd48de84bdc96ca981e5e9b0e"
     },
     {
       "id": "storage",
@@ -29,8 +29,8 @@
     },
     {
       "id": "csharp",
-      "name": "C#",
-      "description": "Language module for C# projects",
+      "name": "C# .NET",
+      "description": "Language module for C#/.NET projects",
       "author": "Lewis Milburn",
       "repo": "Saturn-Editor/Language-CSharp",
       "version": "1.0.0",
@@ -51,6 +51,19 @@
       "version": "1.1.1",
       "download": "https://github.com/Saturn-Editor/Theme-VS/releases/download/v1.1.1/vs-1.1.1.zip",
       "sha256": "fa8e198d9062725c398c1c915540b49b22b7856923d63d1b3650949ede60610c"
+    }
+  ],
+  "extensions": [
+    {
+      "id": "claudecode",
+      "name": "Claude Code",
+      "description": "Claude Code integration for Saturn",
+      "author": "Lewis Milburn",
+      "repo": "Saturn-Editor/Module-Claude",
+      "version": "1.0.0",
+      "saturnApi": "^0.2",
+      "download": "",
+      "sha256": ""
     }
   ]
 }
