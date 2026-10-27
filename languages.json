@@ -8,6 +8,18 @@
     "default": true,
     "versions": [
       {
+        "version": "1.1.2",
+        "saturnApi": "^0.2",
+        "download": "https://github.com/Saturn-Editor/Language-Markdown/releases/download/v1.1.2/markdown-1.1.2.zip",
+        "sha256": "7a5c2c634d4d2af3805eccafde6735e7f77ec8081fb3c0d281ef1d05a162a3e4"
+      },
+      {
+        "version": "1.1.1",
+        "saturnApi": "^0.2",
+        "download": "https://github.com/Saturn-Editor/Language-Markdown/releases/download/v1.1.1/markdown-1.1.1.zip",
+        "sha256": "d3f0edef609185809ed059f94a809129cc7f4915f11cd61462b921982d5c498a"
+      },
+      {
         "version": "1.1.0",
         "saturnApi": "^0.2",
         "download": "https://github.com/Saturn-Editor/Language-Markdown/releases/download/v1.1.0/markdown-1.1.0.zip",
@@ -23,6 +35,12 @@
     "repo": "Saturn-Editor/Language-Storage",
     "default": true,
     "versions": [
+      {
+        "version": "1.1.1",
+        "saturnApi": "^0.2",
+        "download": "https://github.com/Saturn-Editor/Language-Storage/releases/download/v1.1.1/storage-1.1.1.zip",
+        "sha256": "fedecaf2cda8be42294b686e1e65ef5193187fca3fc4cec59ade95960d499a98"
+      },
       {
         "version": "1.1.0",
         "saturnApi": "^0.2",
