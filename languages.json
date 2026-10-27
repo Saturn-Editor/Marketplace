@@ -96,10 +96,10 @@
     "default": false,
     "versions": [
       {
-        "version": "1.0.0",
+        "version": "1.0.2",
         "saturnApi": "^0.2",
-        "download": "https://github.com/Saturn-Editor/Language-Web/releases/download/v1.0.1/web-1.0.1.zip",
-        "sha256": "f91c9eb7386912e5465109466ec06376202ce6ba3960d3925963fa9c8ba70ff8"
+        "download": "https://github.com/Saturn-Editor/Language-Web/releases/download/v1.0.2/web-1.0.2.zip",
+        "sha256": "d6ff22a928813b1a3fcad60b34af9c88ebb4dfe5b67e9e233874dc31774ddf73"
       }
     ]
   }
