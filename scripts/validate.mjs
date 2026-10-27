@@ -47,6 +47,7 @@ const FIELDS = {
 };
 
 const VARIANTS = ['light', 'dark'];
+const FONT_STYLES = ['bold', 'italic', 'underline', 'strikethrough'];
 
 const errors = [];
 const fail = (where, message) => errors.push(`${where}: ${message}`);
@@ -208,9 +209,14 @@ function checkThemeVariant(variant, at, where) {
   variant.syntax.forEach((rule, i) => {
     const ruleAt = `${at}: syntax[${i}]`;
     if (!isString(rule?.scope)) fail(where, `${ruleAt}.scope must be a non-empty string`);
-    if (typeof rule?.color !== 'string' || !COLOR.test(rule.color)) fail(where, `${ruleAt}.color "${rule?.color}" is not a Tailwind colour`);
-    if (rule?.fontStyle !== undefined && rule.fontStyle !== 'bold' && rule.fontStyle !== 'italic') {
-      fail(where, `${ruleAt}.fontStyle must be "bold" or "italic"`);
+    // A colour is a Tailwind colour or one of the theme's own tokens ("text", "muted").
+    if (rule?.color !== undefined && !(typeof rule.color === 'string' && (COLOR.test(rule.color) || THEME_TOKENS.includes(rule.color)))) {
+      fail(where, `${ruleAt}.color "${rule.color}" is not a Tailwind colour or theme token`);
+    }
+    // Space-separated styles; "" resets.
+    if (rule?.fontStyle !== undefined && !(typeof rule.fontStyle === 'string'
+      && rule.fontStyle.split(' ').filter(Boolean).every((style) => FONT_STYLES.includes(style)))) {
+      fail(where, `${ruleAt}.fontStyle "${rule.fontStyle}" must be space-separated ${FONT_STYLES.join('/')} or ""`);
     }
   });
 }

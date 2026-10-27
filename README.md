@@ -70,7 +70,13 @@ One theme holds both its light and dark variants. Saturn's Light/Dark toggle pic
 }
 ```
 
-Each variant needs a `syntax` array (`fontStyle` is optional: `bold` or `italic`) and a Tailwind colour (e.g. `neutral-900`, `white`, `amber-500/18`) for every one of these tokens: `app`, `editor`, `panel`, `raised`, `divider`, `border`, `text`, `strong`, `muted`, `accent`, `on-accent`, `selection`, `hover`.
+Each variant needs a `syntax` array and a Tailwind colour (e.g. `neutral-900`, `white`, `amber-500/18`) for every one of these tokens: `app`, `editor`, `panel`, `raised`, `divider`, `border`, `text`, `strong`, `muted`, `accent`, `on-accent`, `selection`, `hover`.
+
+A syntax rule is `{ "scope", "color"?, "fontStyle"? }`:
+
+- `scope` is a TextMate scope. It can list space-separated ancestor scopes, e.g. `comment.block.documentation entity.name.tag`.
+- `color` is optional: a Tailwind colour, or a theme token such as `text` or `muted`.
+- `fontStyle` is optional: any of `bold`, `italic`, `underline`, `strikethrough`, space-separated, or `""` to reset.
 
 ### Rules
 
