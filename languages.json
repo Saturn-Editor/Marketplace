@@ -80,10 +80,10 @@
     "default": false,
     "versions": [
       {
-        "version": "1.0.0",
+        "version": "1.0.1",
         "saturnApi": "^0.2",
-        "download": "https://github.com/Saturn-Editor/Language-JavaScript/releases/download/v1.0.0/javascript-1.0.0.zip",
-        "sha256": "c13768ae6f9bfe631c0c2c1c688d98895825e1a3cf18653f5b1d285afe92180a"
+        "download": "https://github.com/Saturn-Editor/Language-JavaScript/releases/download/v1.0.1/javascript-1.0.1.zip",
+        "sha256": "b76078cf166de6249cfe23d1b028cbe28b3b9c418d2ebebb9ef28bb47ce4e489"
       }
     ]
   },
