@@ -1,0 +1,50 @@
+[
+  {
+    "id": "markdown",
+    "name": "Markdown",
+    "description": "Language module for Markdown files (.md)",
+    "author": "Lewis Milburn",
+    "repo": "Saturn-Editor/Language-Markdown",
+    "default": true,
+    "versions": [
+      {
+        "version": "1.1.0",
+        "saturnApi": "^0.2",
+        "download": "https://github.com/Saturn-Editor/Language-Markdown/releases/download/v1.1.0/markdown-1.1.0.zip",
+        "sha256": "fa174f836a82c059f02167cef76c0a08a9fb6a6bd48de84bdc96ca981e5e9b0e"
+      }
+    ]
+  },
+  {
+    "id": "storage",
+    "name": "Data & Storage",
+    "description": "JSON, YAML, TOML, XML, INI/.env, CSV and SQL files",
+    "author": "Lewis Milburn",
+    "repo": "Saturn-Editor/Language-Storage",
+    "default": true,
+    "versions": [
+      {
+        "version": "1.0.0",
+        "saturnApi": "^0.1",
+        "download": "https://github.com/Saturn-Editor/Language-Storage/releases/download/v1.0.0/storage-1.0.0.zip",
+        "sha256": "df5bd6e71fcca8a20ea6657897dee48fb52f581625d83af267399ed33d37abe0"
+      }
+    ]
+  },
+  {
+    "id": "csharp",
+    "name": "C# .NET",
+    "description": "Language module for C#/.NET projects",
+    "author": "Lewis Milburn",
+    "repo": "Saturn-Editor/Language-CSharp",
+    "default": false,
+    "versions": [
+      {
+        "version": "2.0.0",
+        "saturnApi": "^0.2",
+        "download": "https://github.com/Saturn-Editor/Language-CSharp/releases/download/v2.0.0/csharp-2.0.0.zip",
+        "sha256": "f1a56f8023e943ada5b575dcd92940ea993fcdcd4405e253fc3e0a3dc962e70a"
+      }
+    ]
+  }
+]

@@ -2,10 +2,10 @@ name: Validate index
 
 on:
   pull_request:
-    paths: ['index.json', 'scripts/**', '.github/workflows/**']
+    paths: ['*.json', 'scripts/**', '.github/workflows/**']
   push:
     branches: [main]
-    paths: ['index.json', 'scripts/**', '.github/workflows/**']
+    paths: ['*.json', 'scripts/**', '.github/workflows/**']
   workflow_dispatch:
 
 permissions:

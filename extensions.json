@@ -1,0 +1,17 @@
+[
+  {
+    "id": "claudecode",
+    "name": "Claude Code",
+    "description": "Claude Code integration for Saturn",
+    "author": "Lewis Milburn",
+    "repo": "Saturn-Editor/Extension-ClaudeCode",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "saturnApi": "^0.2",
+        "download": "https://github.com/Saturn-Editor/Extension-ClaudeCode/releases/download/v1.0.0/claudecode-1.0.0.zip",
+        "sha256": "91d2de7d52f07d2044d40cb94c3f42b56fa13cc9176099d9f38f95319c45390d"
+      }
+    ]
+  }
+]

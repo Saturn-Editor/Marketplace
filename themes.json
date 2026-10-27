@@ -1,0 +1,16 @@
+[
+  {
+    "id": "vs",
+    "name": "VS",
+    "description": "A theme based on Visual Studio.",
+    "author": "Lewis Milburn",
+    "repo": "Saturn-Editor/Theme-VS",
+    "versions": [
+      {
+        "version": "1.1.2",
+        "download": "https://github.com/Saturn-Editor/Theme-VS/releases/download/v1.1.2/vs-1.1.2.zip",
+        "sha256": "713e0307b834301a6d930875e399e897f3ed91e7f707a1f3bc41a23153512f49"
+      }
+    ]
+  }
+]
