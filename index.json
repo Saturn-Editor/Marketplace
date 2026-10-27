@@ -23,8 +23,8 @@
       "author": "Lewis Milburn",
       "repo": "Saturn-Editor/Theme-VS",
       "version": "1.0.0",
-      "download": "",
-      "sha256": ""
+      "download": "https://github.com/Saturn-Editor/Theme-VS/releases/download/v1.0.0/vs-1.0.0.zip",
+      "sha256": "0f95b030542d13093489caf7d489fae5c76c37a9ce13e342e83236904c7d3b14"
     }
   ]
 }
