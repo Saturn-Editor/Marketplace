@@ -3,7 +3,7 @@
 The list of community languages and themes for [Saturn](https://github.com/Saturn-Editor). Saturn has no server: it reads [`index.json`](index.json) straight from this repo at
 
 ```
-https://raw.githubusercontent.com/Saturn-Editor/Marketplace/main/index.json
+https://raw.githubusercontent.com/Saturn-Editor/Marketplace/refs/heads/main/index.json
 ```
 
 ## Submitting a language or theme
@@ -28,12 +28,13 @@ A check downloads your zip, compares its SHA-256, and validates the manifest ins
   "version": "0.1.0",
   "saturnApi": "^0.1",
   "badge": "MD",
+  "default": true,
   "download": "https://github.com/Saturn-Editor/Language-Markdown/releases/download/v0.1.0/markdown-0.1.0.zip",
   "sha256": "<64 hex characters>"
 }
 ```
 
-`badge` is optional. The zip's `saturn-module.json` must have the same `id` and `version`, and a `saturnApi` caret range.
+`badge` is optional. `default` is optional (`true` or `false`): languages with `"default": true` are pre-ticked in Saturn's first-launch "Welcome to Saturn" popup, where the user can untick them before they are installed. The zip's `saturn-module.json` must have the same `id` and `version`, and a `saturnApi` caret range.
 
 ### Theme entry
 
@@ -41,8 +42,7 @@ A check downloads your zip, compares its SHA-256, and validates the manifest ins
 {
   "id": "midnight",
   "name": "Midnight",
-  "type": "dark",
-  "description": "A deep blue dark theme.",
+  "description": "A deep blue theme.",
   "author": "you",
   "repo": "you/saturn-midnight",
   "version": "1.0.0",
@@ -51,12 +51,32 @@ A check downloads your zip, compares its SHA-256, and validates the manifest ins
 }
 ```
 
-The zip's `theme.json` must have the same `id` and `type`, a `syntax` array, and a Tailwind colour (e.g. `neutral-900`, `white`, `amber-500/18`) for each of these tokens: `app`, `editor`, `panel`, `raised`, `divider`, `border`, `text`, `strong`, `muted`, `accent`, `on-accent`, `selection`, `hover`.
+One theme holds both its light and dark variants. Saturn's Light/Dark toggle picks which one is shown. `theme.json` is a theme repo's only manifest. The zip's `theme.json` has the same `id` and `version` as the entry, a `name`, an optional `description`, and a `light` variant, a `dark` variant, or (usually) both:
+
+```json
+{
+  "id": "midnight",
+  "name": "Midnight",
+  "version": "1.0.0",
+  "description": "A deep blue theme.",
+  "light": {
+    "colors": { "app": "slate-100", "editor": "white", "...": "..." },
+    "syntax": [{ "scope": "keyword", "color": "indigo-600", "fontStyle": "bold" }]
+  },
+  "dark": {
+    "colors": { "app": "slate-950", "editor": "slate-900", "...": "..." },
+    "syntax": [{ "scope": "keyword", "color": "indigo-300" }]
+  }
+}
+```
+
+Each variant needs a `syntax` array (`fontStyle` is optional: `bold` or `italic`) and a Tailwind colour (e.g. `neutral-900`, `white`, `amber-500/18`) for every one of these tokens: `app`, `editor`, `panel`, `raised`, `divider`, `border`, `text`, `strong`, `muted`, `accent`, `on-accent`, `selection`, `hover`.
 
 ### Rules
 
 - `id` is lowercase `a-z`, `0-9`, `.` and `-`, and unique across all languages and themes.
 - `version` is semver (`1.2.3`).
+- `languages` and `themes` must each have at least one entry.
 - `download` must be a `.zip` under `https://github.com/<repo>/releases/download/`.
 
 ## Checking locally

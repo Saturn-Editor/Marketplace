@@ -36,12 +36,17 @@ const FIELDS = {
   languages: {
     required: ['id', 'name', 'description', 'author', 'repo', 'version', 'saturnApi', 'download', 'sha256'],
     optional: ['badge'],
+    // Pre-ticked in Saturn's first-launch welcome popup.
+    flags: ['default'],
   },
   themes: {
-    required: ['id', 'name', 'type', 'description', 'author', 'repo', 'version', 'download', 'sha256'],
+    required: ['id', 'name', 'description', 'author', 'repo', 'version', 'download', 'sha256'],
     optional: [],
+    flags: [],
   },
 };
+
+const VARIANTS = ['light', 'dark'];
 
 const errors = [];
 const fail = (where, message) => errors.push(`${where}: ${message}`);
@@ -74,7 +79,7 @@ function checkEntry(kind, entry, where) {
     fail(where, 'must be an object');
     return false;
   }
-  const { required, optional } = FIELDS[kind];
+  const { required, optional, flags } = FIELDS[kind];
   const before = errors.length;
 
   for (const key of required) {
@@ -83,8 +88,11 @@ function checkEntry(kind, entry, where) {
   for (const key of optional) {
     if (key in entry && !isString(entry[key])) fail(where, `"${key}" must be a non-empty string`);
   }
+  for (const key of flags) {
+    if (key in entry && typeof entry[key] !== 'boolean') fail(where, `"${key}" must be true or false`);
+  }
   for (const key of Object.keys(entry)) {
-    if (!required.includes(key) && !optional.includes(key)) fail(where, `unknown field "${key}"`);
+    if (!required.includes(key) && !optional.includes(key) && !flags.includes(key)) fail(where, `unknown field "${key}"`);
   }
   if (errors.length > before) return false;
 
@@ -94,9 +102,6 @@ function checkEntry(kind, entry, where) {
   if (!SHA256.test(entry.sha256)) fail(where, 'sha256 must be 64 lowercase hex characters');
   if (kind === 'languages' && !CARET.test(entry.saturnApi)) {
     fail(where, `saturnApi "${entry.saturnApi}" must be a caret range like "^0.1"`);
-  }
-  if (kind === 'themes' && entry.type !== 'dark' && entry.type !== 'light') {
-    fail(where, 'type must be "dark" or "light"');
   }
 
   // Releases must come from the author's own repo.
@@ -125,6 +130,8 @@ function checkIndex(index) {
       fail('index.json', `"${kind}" must be an array`);
       continue;
     }
+    // Saturn treats an empty list as a broken index.
+    if (index[kind].length === 0) fail('index.json', `"${kind}" must not be empty`);
     index[kind].forEach((entry, i) => {
       const where = `${kind}[${i}]${isString(entry?.id) ? ` (${entry.id})` : ''}`;
       if (!checkEntry(kind, entry, where)) return;
@@ -153,37 +160,57 @@ function checkLanguageManifest(manifest, entry, where) {
 }
 
 function checkThemeManifest(theme, entry, where) {
-  for (const key of ['id', 'name', 'type']) {
+  for (const key of ['id', 'name', 'version']) {
     if (!isString(theme[key])) fail(where, `theme.json: "${key}" must be a non-empty string`);
   }
+  if ('description' in theme && !isString(theme.description)) fail(where, 'theme.json: "description" must be a non-empty string');
   if (theme.id !== entry.id) fail(where, `theme.json id "${theme.id}" does not match entry id "${entry.id}"`);
-  if (theme.type !== entry.type) fail(where, `theme.json type "${theme.type}" does not match entry type "${entry.type}"`);
+  if (theme.version !== entry.version) {
+    fail(where, `theme.json version "${theme.version}" does not match entry version "${entry.version}"`);
+  }
+  for (const key of Object.keys(theme)) {
+    if (!['id', 'name', 'version', 'description', ...VARIANTS].includes(key)) fail(where, `theme.json: unknown field "${key}"`);
+  }
 
-  const colors = theme.colors;
+  const present = VARIANTS.filter((variant) => theme[variant] !== undefined);
+  if (present.length === 0) fail(where, 'theme.json: needs a "light" or "dark" variant (or both)');
+  for (const variant of present) checkThemeVariant(theme[variant], `theme.json: ${variant}`, where);
+}
+
+function checkThemeVariant(variant, at, where) {
+  if (!variant || typeof variant !== 'object' || Array.isArray(variant)) {
+    fail(where, `${at} must be an object`);
+    return;
+  }
+  for (const key of Object.keys(variant)) {
+    if (key !== 'colors' && key !== 'syntax') fail(where, `${at}: unknown field "${key}"`);
+  }
+
+  const colors = variant.colors;
   if (!colors || typeof colors !== 'object') {
-    fail(where, 'theme.json: "colors" must be an object');
+    fail(where, `${at}: "colors" must be an object`);
   } else {
     for (const token of THEME_TOKENS) {
-      if (!(token in colors)) fail(where, `theme.json: colors."${token}" is missing`);
+      if (!(token in colors)) fail(where, `${at}: colors."${token}" is missing`);
       else if (typeof colors[token] !== 'string' || !COLOR.test(colors[token])) {
-        fail(where, `theme.json: colors."${token}" "${colors[token]}" is not a Tailwind colour like "neutral-900" or "amber-500/18"`);
+        fail(where, `${at}: colors."${token}" "${colors[token]}" is not a Tailwind colour like "neutral-900" or "amber-500/18"`);
       }
     }
     for (const token of Object.keys(colors)) {
-      if (!THEME_TOKENS.includes(token)) fail(where, `theme.json: unknown colour token "${token}"`);
+      if (!THEME_TOKENS.includes(token)) fail(where, `${at}: unknown colour token "${token}"`);
     }
   }
 
-  if (!Array.isArray(theme.syntax)) {
-    fail(where, 'theme.json: "syntax" must be an array');
+  if (!Array.isArray(variant.syntax)) {
+    fail(where, `${at}: "syntax" must be an array`);
     return;
   }
-  theme.syntax.forEach((rule, i) => {
-    const at = `theme.json: syntax[${i}]`;
-    if (!isString(rule?.scope)) fail(where, `${at}.scope must be a non-empty string`);
-    if (typeof rule?.color !== 'string' || !COLOR.test(rule.color)) fail(where, `${at}.color "${rule?.color}" is not a Tailwind colour`);
+  variant.syntax.forEach((rule, i) => {
+    const ruleAt = `${at}: syntax[${i}]`;
+    if (!isString(rule?.scope)) fail(where, `${ruleAt}.scope must be a non-empty string`);
+    if (typeof rule?.color !== 'string' || !COLOR.test(rule.color)) fail(where, `${ruleAt}.color "${rule?.color}" is not a Tailwind colour`);
     if (rule?.fontStyle !== undefined && rule.fontStyle !== 'bold' && rule.fontStyle !== 'italic') {
-      fail(where, `${at}.fontStyle must be "bold" or "italic"`);
+      fail(where, `${ruleAt}.fontStyle must be "bold" or "italic"`);
     }
   });
 }
