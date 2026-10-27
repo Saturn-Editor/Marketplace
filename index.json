@@ -59,7 +59,7 @@
       "name": "Claude Code",
       "description": "Claude Code integration for Saturn",
       "author": "Lewis Milburn",
-      "repo": "Saturn-Editor/Module-Claude",
+      "repo": "Saturn-Editor/Extension-ClaudeCode",
       "version": "1.0.0",
       "saturnApi": "^0.2",
       "download": "https://github.com/Saturn-Editor/Extension-ClaudeCode/releases/download/v1.0.0/claudecode-1.0.0.zip",
