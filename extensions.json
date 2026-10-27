@@ -7,10 +7,10 @@
     "repo": "Saturn-Editor/Extension-ClaudeCode",
     "versions": [
       {
-        "version": "1.0.0",
+        "version": "1.0.1",
         "saturnApi": "^0.2",
-        "download": "https://github.com/Saturn-Editor/Extension-ClaudeCode/releases/download/v1.0.0/claudecode-1.0.0.zip",
-        "sha256": "91d2de7d52f07d2044d40cb94c3f42b56fa13cc9176099d9f38f95319c45390d"
+        "download": "https://github.com/Saturn-Editor/Extension-ClaudeCode/releases/download/v1.0.1/claudecode-1.0.1.zip",
+        "sha256": "9e2b115b5437d3430b7f77954b9cc2d54712934289578837bf73f85770419fea"
       }
     ]
   }

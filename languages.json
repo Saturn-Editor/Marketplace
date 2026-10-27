@@ -24,10 +24,10 @@
     "default": true,
     "versions": [
       {
-        "version": "1.0.0",
-        "saturnApi": "^0.1",
-        "download": "https://github.com/Saturn-Editor/Language-Storage/releases/download/v1.0.0/storage-1.0.0.zip",
-        "sha256": "df5bd6e71fcca8a20ea6657897dee48fb52f581625d83af267399ed33d37abe0"
+        "version": "1.1.0",
+        "saturnApi": "^0.2",
+        "download": "https://github.com/Saturn-Editor/Language-Storage/releases/download/v1.1.0/storage-1.1.0.zip",
+        "sha256": "118c4e611e4e61729e777b024c9a1d3d50c5cd3cc1d30223a4ac2c63d22d94e5"
       }
     ]
   },
@@ -40,10 +40,48 @@
     "default": false,
     "versions": [
       {
+        "version": "2.1.0",
+        "saturnApi": "^0.2",
+        "download": "https://github.com/Saturn-Editor/Language-CSharp/releases/download/v2.1.0/csharp-2.1.0.zip",
+        "sha256": "ef2a78b716df85440b33e4a711abe0207c4782f062d2bb8bb839ed2efcf47299"
+      },
+      {
         "version": "2.0.0",
         "saturnApi": "^0.2",
         "download": "https://github.com/Saturn-Editor/Language-CSharp/releases/download/v2.0.0/csharp-2.0.0.zip",
         "sha256": "f1a56f8023e943ada5b575dcd92940ea993fcdcd4405e253fc3e0a3dc962e70a"
+      }
+    ]
+  },
+  {
+    "id": "javascript",
+    "name": "JavaScript and TypeScript",
+    "description": "Language module for JavaScript and TypeScript projects",
+    "author": "Lewis Milburn",
+    "repo": "Saturn-Editor/Language-JavaScript",
+    "default": false,
+    "versions": [
+      {
+        "version": "1.0.0",
+        "saturnApi": "^0.2",
+        "download": "https://github.com/Saturn-Editor/Language-JavaScript/releases/download/v1.0.0/javascript-1.0.0.zip",
+        "sha256": "c13768ae6f9bfe631c0c2c1c688d98895825e1a3cf18653f5b1d285afe92180a"
+      }
+    ]
+  },
+  {
+    "id": "web",
+    "name": "Web",
+    "description": "Language module for HTML and CSS projects",
+    "author": "Lewis Milburn",
+    "repo": "Saturn-Editor/Language-Web",
+    "default": false,
+    "versions": [
+      {
+        "version": "1.0.0",
+        "saturnApi": "^0.2",
+        "download": "https://github.com/Saturn-Editor/Language-Web/releases/download/v1.0.0/web-1.0.0.zip",
+        "sha256": "3fc4997a7b8798c12663f77b18299ff04f3598fa73377e4389023e58ee045434"
       }
     ]
   }
