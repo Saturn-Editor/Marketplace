@@ -33,12 +33,12 @@
       "description": "Language module for C#/.NET projects",
       "author": "Lewis Milburn",
       "repo": "Saturn-Editor/Language-CSharp",
-      "version": "1.0.0",
-      "saturnApi": "^0.1",
+      "version": "2.0.0",
+      "saturnApi": "^0.2",
       "badge": "C#",
       "default": false,
-      "download": "https://github.com/Saturn-Editor/Language-CSharp/releases/download/v1.0.0/csharp-1.0.0.zip",
-      "sha256": "1ebd7f47413b7b2149c256c04e329ba2d397fe68a5145c2d493d664fe73be87b"
+      "download": "https://github.com/Saturn-Editor/Language-CSharp/releases/download/v2.0.0/csharp-2.0.0.zip",
+      "sha256": "f1a56f8023e943ada5b575dcd92940ea993fcdcd4405e253fc3e0a3dc962e70a"
     }
   ],
   "themes": [
@@ -48,9 +48,9 @@
       "description": "A theme based on Visual Studio.",
       "author": "Lewis Milburn",
       "repo": "Saturn-Editor/Theme-VS",
-      "version": "1.1.1",
-      "download": "https://github.com/Saturn-Editor/Theme-VS/releases/download/v1.1.1/vs-1.1.1.zip",
-      "sha256": "fa8e198d9062725c398c1c915540b49b22b7856923d63d1b3650949ede60610c"
+      "version": "1.1.2",
+      "download": "https://github.com/Saturn-Editor/Theme-VS/releases/download/v1.1.2/vs-1.1.2.zip",
+      "sha256": "713e0307b834301a6d930875e399e897f3ed91e7f707a1f3bc41a23153512f49"
     }
   ],
   "extensions": [
@@ -62,8 +62,8 @@
       "repo": "Saturn-Editor/Module-Claude",
       "version": "1.0.0",
       "saturnApi": "^0.2",
-      "download": "",
-      "sha256": ""
+      "download": "https://github.com/Saturn-Editor/Extension-ClaudeCode/releases/download/v1.0.0/claudecode-1.0.0.zip",
+      "sha256": "91d2de7d52f07d2044d40cb94c3f42b56fa13cc9176099d9f38f95319c45390d"
     }
   ]
 }
