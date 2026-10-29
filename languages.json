@@ -8,6 +8,12 @@
     "default": true,
     "versions": [
       {
+        "version": "1.2.0",
+        "saturnApi": "^0.3",
+        "download": "https://github.com/Saturn-Editor/Language-Markdown/releases/download/v1.2.0/markdown-1.2.0.zip",
+        "sha256": "bd2d14d3d932c44cc463608685e38ee72f5c9f2cce20ecdca3e50b2b5813b0e3"
+      },
+      {
         "version": "1.1.2",
         "saturnApi": "^0.2",
         "download": "https://github.com/Saturn-Editor/Language-Markdown/releases/download/v1.1.2/markdown-1.1.2.zip",
@@ -58,6 +64,18 @@
     "default": false,
     "versions": [
       {
+        "version": "2.3.0",
+        "saturnApi": "^0.3",
+        "download": "https://github.com/Saturn-Editor/Language-CSharp/releases/download/v2.3.0/csharp-2.3.0.zip",
+        "sha256": "f09bc3af91de2c8f228b18bca27023bf0ad48074147c10d528bb35abe528289b"
+      },
+      {
+        "version": "2.2.0",
+        "saturnApi": "^0.2",
+        "download": "https://github.com/Saturn-Editor/Language-CSharp/releases/download/v2.2.0/csharp-2.2.0.zip",
+        "sha256": "8a32dff76ee134b8cce641b6300efddd28ec1554c693216620829ee1878364e4"
+      },
+      {
         "version": "2.1.0",
         "saturnApi": "^0.2",
         "download": "https://github.com/Saturn-Editor/Language-CSharp/releases/download/v2.1.0/csharp-2.1.0.zip",
@@ -72,22 +90,6 @@
     ]
   },
   {
-    "id": "javascript",
-    "name": "JavaScript and TypeScript",
-    "description": "Language module for JavaScript and TypeScript projects",
-    "author": "Lewis Milburn",
-    "repo": "Saturn-Editor/Language-JavaScript",
-    "default": false,
-    "versions": [
-      {
-        "version": "1.0.1",
-        "saturnApi": "^0.2",
-        "download": "https://github.com/Saturn-Editor/Language-JavaScript/releases/download/v1.0.1/javascript-1.0.1.zip",
-        "sha256": "b76078cf166de6249cfe23d1b028cbe28b3b9c418d2ebebb9ef28bb47ce4e489"
-      }
-    ]
-  },
-  {
     "id": "web",
     "name": "Web",
     "description": "Language module for HTML and CSS projects",
@@ -96,10 +98,48 @@
     "default": false,
     "versions": [
       {
+        "version": "1.2.0",
+        "saturnApi": "^0.3",
+        "download": "https://github.com/Saturn-Editor/Language-Web/releases/download/v1.2.0/web-1.2.0.zip",
+        "sha256": "dc477bec1c948d46fb7c7babe269fa7ee5efbdedf81538997d114c266ca8e5d8"
+      },
+      {
         "version": "1.0.2",
         "saturnApi": "^0.2",
         "download": "https://github.com/Saturn-Editor/Language-Web/releases/download/v1.0.2/web-1.0.2.zip",
         "sha256": "d6ff22a928813b1a3fcad60b34af9c88ebb4dfe5b67e9e233874dc31774ddf73"
+      }
+    ]
+  },
+  {
+    "id": "php",
+    "name": "PHP",
+    "description": "Language module for PHP projects",
+    "author": "Lewis Milburn",
+    "repo": "Saturn-Editor/Language-PHP",
+    "default": false,
+    "versions": [
+      {
+        "version": "0.1.0",
+        "saturnApi": "^0.3",
+        "download": "https://github.com/Saturn-Editor/Language-PHP/releases/download/v0.1.0/php-0.1.0.zip",
+        "sha256": "52a600292724fb1d6ebe9dbf9b656221d11e74ecec6d0284b70dc550c0d9ca97"
+      }
+    ]
+  },
+  {
+    "id": "java",
+    "name": "Java",
+    "description": "Language module for Java projects",
+    "author": "Lewis Milburn",
+    "repo": "Saturn-Editor/Language-Java",
+    "default": false,
+    "versions": [
+      {
+        "version": "0.1.1",
+        "saturnApi": "^0.3",
+        "download": "https://github.com/Saturn-Editor/Language-Java/releases/download/v0.1.1/java-0.1.1.zip",
+        "sha256": "27db31b9de853c3641e0de52b036d8ca7a55269a82df42119fe5a6a366c7e7a7"
       }
     ]
   }
