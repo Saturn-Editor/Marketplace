@@ -8,6 +8,12 @@
     "default": true,
     "versions": [
       {
+        "version": "1.2.1",
+        "saturnApi": "^0.3",
+        "download": "https://github.com/Saturn-Editor/Language-Markdown/releases/download/v1.2.1/markdown-1.2.1.zip",
+        "sha256": "c2d935c4ee24bce97fb3a5d3d682eabaac3e9ea5a54d9148f47c8c0022f16184"
+      },
+      {
         "version": "1.2.0",
         "saturnApi": "^0.3",
         "download": "https://github.com/Saturn-Editor/Language-Markdown/releases/download/v1.2.0/markdown-1.2.0.zip",
@@ -64,6 +70,12 @@
     "default": false,
     "versions": [
       {
+        "version": "2.4.0",
+        "saturnApi": "^0.4",
+        "download": "https://github.com/Saturn-Editor/Language-CSharp/releases/download/v2.4.0/csharp-2.4.0.zip",
+        "sha256": "1aaf451418151688f075d6b7e763e112ed41953fe791b91d885568c1ae030a02"
+      },
+      {
         "version": "2.3.0",
         "saturnApi": "^0.3",
         "download": "https://github.com/Saturn-Editor/Language-CSharp/releases/download/v2.3.0/csharp-2.3.0.zip",
@@ -98,6 +110,12 @@
     "default": false,
     "versions": [
       {
+        "version": "1.3.0",
+        "saturnApi": "^0.4",
+        "download": "https://github.com/Saturn-Editor/Language-Web/releases/download/v1.3.0/web-1.3.0.zip",
+        "sha256": "bdcf711773ea7a4e27ede8cab08b5c8e732a791803c61be0f0ec19ee98acb30e"
+      },
+      {
         "version": "1.2.0",
         "saturnApi": "^0.3",
         "download": "https://github.com/Saturn-Editor/Language-Web/releases/download/v1.2.0/web-1.2.0.zip",
@@ -120,6 +138,12 @@
     "default": false,
     "versions": [
       {
+        "version": "1.0.0",
+        "saturnApi": "^0.4",
+        "download": "https://github.com/Saturn-Editor/Language-PHP/releases/download/v1.0.0/php-1.0.0.zip",
+        "sha256": "6eb6d2372374ad03924add79920f4cf519112021b58456d744ad0f66fb77e0f6"
+      }
+      {
         "version": "0.1.1",
         "saturnApi": "^0.3",
         "download": "https://github.com/Saturn-Editor/Language-PHP/releases/download/v0.1.1/php-0.1.1.zip",
@@ -135,6 +159,12 @@
     "repo": "Saturn-Editor/Language-Java",
     "default": false,
     "versions": [
+      {
+        "version": "1.0.0",
+        "saturnApi": "^0.4",
+        "download": "https://github.com/Saturn-Editor/Language-Java/releases/download/v1.0.0/java-1.0.0.zip",
+        "sha256": "74178ca1f196574231a9871fa1cb3f987fbf153350c531171ade77c189d8a4d9"
+      },
       {
         "version": "0.1.1",
         "saturnApi": "^0.3",
