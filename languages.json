@@ -142,7 +142,7 @@
         "saturnApi": "^0.4",
         "download": "https://github.com/Saturn-Editor/Language-PHP/releases/download/v1.0.0/php-1.0.0.zip",
         "sha256": "6eb6d2372374ad03924add79920f4cf519112021b58456d744ad0f66fb77e0f6"
-      }
+      },
       {
         "version": "0.1.1",
         "saturnApi": "^0.3",
