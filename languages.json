@@ -8,10 +8,10 @@
     "default": true,
     "versions": [
       {
-        "version": "1.3.0",
+        "version": "1.3.1",
         "saturnApi": "^1.0",
-        "download": "https://github.com/Saturn-Editor/Language-Markdown/releases/download/v1.3.0/markdown-1.3.0.zip",
-        "sha256": "5f9c69bf30fdb3fbee4761039463c86aa1a0ee7acc40498af658da928ced3588"
+        "download": "https://github.com/Saturn-Editor/Language-Markdown/releases/download/v1.3.1/markdown-1.3.1.zip",
+        "sha256": "36c696c7119c49b9dc562fdd05e834f1684b2e4044f85e04add11be647308497"
       }
     ]
   },
@@ -24,10 +24,10 @@
     "default": true,
     "versions": [
       {
-        "version": "1.3.0",
+        "version": "1.3.1",
         "saturnApi": "^1.0",
-        "download": "https://github.com/Saturn-Editor/Language-Storage/releases/download/v1.3.0/storage-1.3.0.zip",
-        "sha256": "f7969b5be858f65a91af998de1f082397251837e591db7992075132e544f9c09"
+        "download": "https://github.com/Saturn-Editor/Language-Storage/releases/download/v1.3.1/storage-1.3.1.zip",
+        "sha256": "bed4afcba4ecfbefbd6ad10bd90ad4bd9bb9d5db04c0424f4583dfa7cb4519d5"
       }
     ]
   },
@@ -40,10 +40,10 @@
     "default": true,
     "versions": [
       {
-        "version": "1.1.0",
+        "version": "1.1.1",
         "saturnApi": "^1.0",
-        "download": "https://github.com/Saturn-Editor/Language-Images/releases/download/v1.1.0/images-1.1.0.zip",
-        "sha256": "a6a5c318834320e6642fb4769e7965818172d20caba5a9107af10cf109fca5e8"
+        "download": "https://github.com/Saturn-Editor/Language-Images/releases/download/v1.1.1/images-1.1.1.zip",
+        "sha256": "e26f8b6808bdf473163a02e9377c57c3380da0399a919e9f000a683a48aed37d"
       }
     ]
   },

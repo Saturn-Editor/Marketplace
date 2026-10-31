@@ -8,10 +8,10 @@
     "default": true,
     "versions": [
       {
-        "version": "1.0.0",
+        "version": "1.0.2",
         "saturnApi": "^1.0",
-        "download": "https://github.com/Saturn-Editor/Extension-Diagrams/releases/download/v1.0.0/diagrams-1.0.0.zip",
-        "sha256": "86f0599935a65cea0b320b4e3637d9456a7372f8731feaa6b8616aeb731e687b"
+        "download": "https://github.com/Saturn-Editor/Extension-Diagrams/releases/download/v1.0.2/diagrams-1.0.2.zip",
+        "sha256": "de8e1a01621e01be09dcc0b03dcd65e2bad515138c3962a2c218074c405c502a"
       }
     ]
   },
@@ -24,10 +24,10 @@
     "default": true,
     "versions": [
       {
-        "version": "1.0.0",
+        "version": "1.0.1",
         "saturnApi": "^1.0",
-        "download": "https://github.com/Saturn-Editor/Extension-API-Workspace/releases/download/v1.0.0/apiworkspace-1.0.0.zip",
-        "sha256": "600ea66916bcc71849dcc6438f30f4c938b9ce5c0655d14463bad8bfba14706e"
+        "download": "https://github.com/Saturn-Editor/Extension-API-Workspace/releases/download/v1.0.1/apiworkspace-1.0.1.zip",
+        "sha256": "57b5e5a80c4b0c9c132d074912e7955a3be8eb11e1a284d4fa3541bf76d30850"
       }
     ]
   },
