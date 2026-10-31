@@ -16,7 +16,7 @@
     ]
   },
   {
-    "id": "api-workspace",
+    "id": "apiworkspace",
     "name": "API Workspace",
     "description": "API Workspace integration for Saturn",
     "author": "Lewis Milburn",
